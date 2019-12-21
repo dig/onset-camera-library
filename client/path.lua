@@ -67,21 +67,21 @@ local function Path_StartCamera(path, length)
       local sry = (nry - cry) / steps
       local srz = (nrz - crz) / steps
 
-      if nrx < 180 and crx > 180 then
+      if nrx < 90 and crx > 270 then
         srx = ((360 - crx) / steps) + (nrx / steps)
-      elseif crx < 180 and nrx > 180 then
+      elseif crx < 90 and nrx > 270 then
         srx = -((crx / steps) + ((360 - nrx) / steps))
       end
 
-      if nry < 180 and cry > 180 then
+      if nry < 90 and cry > 270 then
         sry = ((360 - cry) / steps) + (nry / steps)
-      elseif cry < 180 and nry > 180 then
+      elseif cry < 90 and nry > 270 then
         sry = -((cry / steps) + ((360 - nry) / steps))
       end
 
-      if nrz < 180 and crz > 180 then
+      if nrz < 90 and crz > 270 then
         srz = ((360 - crz) / steps) + (nrz / steps)
-      elseif crz < 180 and nrz > 180 then
+      elseif crz < 90 and nrz > 270 then
         srz = -((crz / steps) + ((360 - nrz) / steps))
       end
 
