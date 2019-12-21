@@ -45,19 +45,16 @@ Camera.StartCameraPan(center, distance, speed, [, offset])
 #### StartCameraPath
 Start the camera following a path.
 ```lua
-Camera.StartCameraPath(path, length, [, OnFinish], [, ReturnToBody])
+Camera.StartCameraPath(path, length)
 ```
 * **path** Table with position arrays inside. Each array must contain 6 entries, x, y, z, rx, ry, rz. r being rotation. Format for each array should be { x, y, z, rx, ry, rz }. Example: See above
 * **length** How long the camera will follow the path for in milliseconds. Example: 5000
-* **OnFinish (optional)** Function called when the path has finished. Example: function() AddPlayerChat('path has finished!') end
-* **ReturnToBody (optional)** True/false, if the camera should return to the players body after it is finished.
 
 #### StopCamera
 Stop the camera.
 ```lua
-Camera.StopCamera([, ReturnToBody])
+Camera.StopCamera()
 ```
-* **ReturnToBody (optional)** True/false, if the camera should return to the players body.
 
 #### IsCameraEnabled
 Returns if the camera is currently enabled.
