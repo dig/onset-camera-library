@@ -29,6 +29,10 @@ local function Path_OnCameraTick(path, length, data, steps)
     else
       CameraCurrentStep = 0
       CameraCurrentIndex = CameraCurrentIndex + 1
+
+      local x, y, z, rx, ry, rz = path[CameraCurrentIndex][1], path[CameraCurrentIndex][2], path[CameraCurrentIndex][3], path[CameraCurrentIndex][4], path[CameraCurrentIndex][5], path[CameraCurrentIndex][6] 
+      SetCameraLocation(x, y, z, true)
+      SetCameraRotation(rx, ry, rz, true)
     end
   end
 end
@@ -66,7 +70,7 @@ local function Path_StartCamera(path, length)
       if nrx < 180 and crx > 180 then
         srx = ((360 - crx) / steps) + (nrx / steps)
       elseif crx < 180 and nrx > 180 then
-        srx = (crx / steps) + ((360 - nrx) / steps)
+        srx = -((crx / steps) + ((360 - nrx) / steps))
       end
 
       if sry <= 180 then
