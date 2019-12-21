@@ -13,12 +13,6 @@ Edit your server_config.json to install camera as a package.
 ```lua
 local Camera = ImportPackage('camera')
 
-AddEvent('OnCameraStart', function(type)
-  if type == CAMERA_PAN then
-    AddPlayerChat('Camera has started panning.')
-  end
-end)
-
 -- Start camera panning over the quarry
 Camera.StartCameraPan({ -98067, 93583, 400 }, 15000, 0.05, { 0, 0, 7000 })
 
@@ -36,11 +30,6 @@ AddPlayerChat(tostring(Camera.IsCameraEnabled()))
 -- Stop camera
 Camera.StopCamera()
 ```
-
-### Types
-CAMERA_PAN
-CAMERA_PATH
-See events for use.
 
 ### Functions
 #### StartCameraPan
@@ -73,10 +62,3 @@ Returns if the camera is currently enabled.
 Camera.IsCameraEnabled()
 ```
 Return boolean.
-
-### Events
-#### OnCameraStart(cameraType)
-Called when the camera has successfully started.
-
-#### OnCameraStop(cameraType)
-Called when the camera stopped.
