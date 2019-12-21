@@ -6,6 +6,9 @@
 CAMERA_DISABLED = 0
 CAMERA_ENABLED = 1
 
+CAMERA_PAN = 0
+CAMERA_PATH = 1
+
 CameraState = CAMERA_DISABLED
 
 function Base_IsCameraEnabled()
@@ -15,6 +18,7 @@ AddFunctionExport('IsCameraEnabled', Base_IsCameraEnabled)
 
 function Base_StopCamera()
   CallEvent('_OnStopCamera')
+  
   SetCameraLocation(0, 0, 0, false)
   SetCameraRotation(0, 0, 0, false)
 

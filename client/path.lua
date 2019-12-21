@@ -102,12 +102,15 @@ local function Path_StartCamera(path, length)
 
   CameraTimer = CreateTimer(Path_OnCameraTick, CameraTick, path, length, _data, steps)
   CameraState = CAMERA_ENABLED
+
+  CallEvent('CameraStart', CAMERA_PATH)
 end
 AddFunctionExport('StartCameraPath', Path_StartCamera)
 
 local function Path_OnStopCamera()
   if (CameraState == CAMERA_ENABLED and CameraTimer ~= 0) then
     DestroyTimer(CameraTimer)
+    CallEvent('CameraStop', CAMERA_PATH)
   end
 end
 AddEvent('_OnStopCamera', Path_OnStopCamera)
