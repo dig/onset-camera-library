@@ -16,11 +16,17 @@ function Base_IsCameraEnabled()
 end
 AddFunctionExport('IsCameraEnabled', Base_IsCameraEnabled)
 
-function Base_StopCamera()
+function Base_StopCamera(ReturnToBody)
   CallEvent('_OnStopCamera')
+
+  if ReturnToBody == nil then
+    ReturnToBody = true
+  end
   
-  SetCameraLocation(0, 0, 0, false)
-  SetCameraRotation(0, 0, 0, false)
+  if ReturnToBody then
+    SetCameraLocation(0, 0, 0, false)
+    SetCameraRotation(0, 0, 0, false)
+  end
 
   SetIgnoreLookInput(false)
   SetIgnoreMoveInput(false)

@@ -9,8 +9,11 @@ local CameraTick = 10
 local CameraCurrentIndex = 1
 local CameraCurrentStep = 0
 
-local function Path_OnCameraTick(path, length, data, steps)
-  if data[CameraCurrentIndex] == nil then return Base_StopCamera() end
+local function Path_OnCameraTick(path, length, data, steps, OnFinish, ReturnToBody)
+  if data[CameraCurrentIndex] == nil then 
+    Base_StopCamera() 
+    return OnFinish()
+  end
   local _data = data[CameraCurrentIndex]
 
   local x, y, z = GetCameraLocation(false)
@@ -25,7 +28,8 @@ local function Path_OnCameraTick(path, length, data, steps)
 
   if (CameraCurrentStep >= steps) then
     if CameraCurrentIndex >= (#path - 1) then
-      Base_StopCamera()
+      Base_StopCamera(ReturnToBody)
+      OnFinish()
     else
       CameraCurrentStep = 0
       CameraCurrentIndex = CameraCurrentIndex + 1
@@ -37,8 +41,16 @@ local function Path_OnCameraTick(path, length, data, steps)
   end
 end
 
-local function Path_StartCamera(path, length)
+local function Path_StartCamera(path, length, OnFinish, ReturnToBody)
   if (path == nil or length == nil or CameraState ~= CAMERA_DISABLED) then return end
+
+  if OnFinish == nil then
+    OnFinish = function() end
+  end
+
+  if ReturnToBody == nil then
+    ReturnToBody = true
+  end
 
   -- Validation of path
   local _isValidPaths = true
@@ -107,7 +119,7 @@ local function Path_StartCamera(path, length)
   SetCameraLocation(x, y, z, true)
   SetCameraRotation(rx, ry, rz, true)
 
-  CameraTimer = CreateTimer(Path_OnCameraTick, CameraTick, path, length, _data, steps)
+  CameraTimer = CreateTimer(Path_OnCameraTick, CameraTick, path, length, _data, steps, OnFinish, ReturnToBody)
   CameraState = CAMERA_ENABLED
 
   CallEvent('OnCameraStart', CAMERA_PATH)
