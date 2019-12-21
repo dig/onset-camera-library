@@ -39,14 +39,14 @@ local function Pan_StartCamera(center, distance, speed, offset)
   CameraTimer = CreateTimer(Pan_OnCameraTick, 10, center, distance, speed, offset)
   CameraState = CAMERA_ENABLED
 
-  CallEvent('CameraStart', CAMERA_PAN)
+  CallEvent('OnCameraStart', CAMERA_PAN)
 end
 AddFunctionExport('StartCameraPan', Pan_StartCamera)
 
 local function Pan_OnStopCamera()
   if (CameraState == CAMERA_ENABLED and CameraTimer ~= 0) then
     DestroyTimer(CameraTimer)
-    CallEvent('CameraStop', CAMERA_PAN)
+    CallEvent('OnCameraStop', CAMERA_PAN)
   end
 end
 AddEvent('_OnStopCamera', Pan_OnStopCamera)
