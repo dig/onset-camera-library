@@ -36,6 +36,9 @@ local function Pan_StartCamera(center, distance, speed, offset)
     offset = { 0, 0, 0 }
   end
 
+  SetIgnoreLookInput(true)
+  SetIgnoreMoveInput(true)
+
   CameraTimer = CreateTimer(Pan_OnCameraTick, 10, center, distance, speed, offset)
   CameraState = CAMERA_ENABLED
 

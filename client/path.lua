@@ -99,6 +99,9 @@ local function Path_StartCamera(path, length)
 
   if #_data <= 0 then return print('Camera: Unable to calculate path steps.') end
 
+  SetIgnoreLookInput(true)
+  SetIgnoreMoveInput(true)
+
   -- Set starting position
   local x, y, z, rx, ry, rz = path[1][1], path[1][2], path[1][3], path[1][4], path[1][5], path[1][6] 
   SetCameraLocation(x, y, z, true)
