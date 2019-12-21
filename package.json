@@ -1,0 +1,9 @@
+{
+  "author": "Digital",
+  "version": "1.0",
+  "client_scripts": [
+    "client/base.lua",
+    "client/pan.lua",
+    "client/path.lua"
+  ]
+}
