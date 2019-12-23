@@ -46,7 +46,7 @@ Camera.StartCameraPan(center, distance, speed, [, offset], [, stayInCamera])
 #### StartCameraPath
 Start the camera following a path.
 ```lua
-Camera.StartCameraPath(path, length)
+Camera.StartCameraPath(path, length, [, stayInCamera])
 ```
 * **path** Table with position arrays inside. Each array must contain 6 entries, x, y, z, rx, ry, rz. r being rotation. Format for each array should be { x, y, z, rx, ry, rz }. Example: See above
 * **length** How long the camera will follow the path for in milliseconds. Example: 5000
