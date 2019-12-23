@@ -18,13 +18,6 @@ AddFunctionExport('IsCameraEnabled', Base_IsCameraEnabled)
 
 function Base_StopCamera()
   CallEvent('_OnStopCamera')
-  
-  SetCameraLocation(0, 0, 0, false)
-  SetCameraRotation(0, 0, 0, false)
-
-  SetIgnoreLookInput(false)
-  SetIgnoreMoveInput(false)
-
   CameraState = CAMERA_DISABLED
 end
 AddFunctionExport('StopCamera', Base_StopCamera)

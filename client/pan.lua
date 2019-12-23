@@ -6,6 +6,8 @@
 local CameraTimer = 0
 local CameraRotation = 0
 
+local CameraStayInCamera = false
+
 local function Pan_OnCameraTick(center, distance, speed, offset)
   if CameraState ~= CAMERA_ENABLED then return end
 
@@ -30,10 +32,16 @@ local function Pan_OnCameraTick(center, distance, speed, offset)
   SetCameraRotation(pitch, yaw, 0, true)
 end
 
-local function Pan_StartCamera(center, distance, speed, offset)
+local function Pan_StartCamera(center, distance, speed, offset, stayInCamera)
   if (center == nil or distance == nil or speed == nil or CameraState ~= CAMERA_DISABLED) then return end
   if offset == nil then
     offset = { 0, 0, 0 }
+  end
+
+  if stayInCamera == nil then
+    CameraStayInCamera = false
+  else
+    CameraStayInCamera = stayInCamera
   end
 
   SetIgnoreLookInput(true)
@@ -49,6 +57,15 @@ AddFunctionExport('StartCameraPan', Pan_StartCamera)
 local function Pan_OnStopCamera()
   if (CameraState == CAMERA_ENABLED and CameraTimer ~= 0) then
     DestroyTimer(CameraTimer)
+
+    if not CameraStayInCamera then
+      SetCameraLocation(0, 0, 0, false)
+      SetCameraRotation(0, 0, 0, false)
+
+      SetIgnoreLookInput(false)
+      SetIgnoreMoveInput(false)
+    end
+
     CallEvent('OnCameraStop', CAMERA_PAN)
   end
 end

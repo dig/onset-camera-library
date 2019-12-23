@@ -9,6 +9,8 @@ local CameraTick = 10
 local CameraCurrentIndex = 1
 local CameraCurrentStep = 0
 
+local CameraStayInCamera = false
+
 local function Path_OnCameraTick(path, length, data, steps)
   if data[CameraCurrentIndex] == nil then return Base_StopCamera() end
   local _data = data[CameraCurrentIndex]
@@ -37,8 +39,14 @@ local function Path_OnCameraTick(path, length, data, steps)
   end
 end
 
-local function Path_StartCamera(path, length)
+local function Path_StartCamera(path, length, stayInCamera)
   if (path == nil or length == nil or CameraState ~= CAMERA_DISABLED) then return end
+  
+  if stayInCamera == nil then
+    CameraStayInCamera = false
+  else
+    CameraStayInCamera = stayInCamera
+  end
 
   -- Validation of path
   local _isValidPaths = true
@@ -117,6 +125,15 @@ AddFunctionExport('StartCameraPath', Path_StartCamera)
 local function Path_OnStopCamera()
   if (CameraState == CAMERA_ENABLED and CameraTimer ~= 0) then
     DestroyTimer(CameraTimer)
+
+    if not CameraStayInCamera then
+      SetCameraLocation(0, 0, 0, false)
+      SetCameraRotation(0, 0, 0, false)
+
+      SetIgnoreLookInput(false)
+      SetIgnoreMoveInput(false)
+    end
+
     CallEvent('OnCameraStop', CAMERA_PATH)
   end
 end
