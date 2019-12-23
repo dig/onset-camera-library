@@ -35,12 +35,13 @@ Camera.StopCamera()
 #### StartCameraPan
 Start the camera panning over a center point.
 ```lua
-Camera.StartCameraPan(center, distance, speed, [, offset])
+Camera.StartCameraPan(center, distance, speed, [, offset], [, stayInCamera])
 ```
 * **center** Array with 3 entries, x, y, z. Example: { -98067, 93583, 400 }
 * **distance** Camera distance from center point. Example: 15000
 * **speed** Speed of the camera. Example: 0.05
 * **offset (optional)** Offset to the camera position. Example: { 0, 0, 7000 }
+* **stayInCamera (optional)** Default false, if true the camera will not return to the player after the pan ends.
 
 #### StartCameraPath
 Start the camera following a path.
@@ -49,6 +50,7 @@ Camera.StartCameraPath(path, length)
 ```
 * **path** Table with position arrays inside. Each array must contain 6 entries, x, y, z, rx, ry, rz. r being rotation. Format for each array should be { x, y, z, rx, ry, rz }. Example: See above
 * **length** How long the camera will follow the path for in milliseconds. Example: 5000
+* **stayInCamera (optional)** Default false, if true the camera will not return to the player after the path ends.
 
 #### StopCamera
 Stop the camera.
